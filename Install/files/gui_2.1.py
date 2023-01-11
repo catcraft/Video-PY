@@ -19,7 +19,7 @@ topcol = "#293241"
 bgcol = "#98c1d9"
 hlpbg = "#7b9bb1"
 btncol = "#ababab"
-version = 2.1
+version = 0
 small = False
 try:
     name = (platform.uname().node)
@@ -127,11 +127,14 @@ sz = int(font_size)
 try:
     with open(CONFIG_FILE_PATH, 'r') as f:
         config = json.load(f)
+        with open(CONFIG_FILE_PATH, 'w') as f:
+            json.dump(config, f)
 except (FileNotFoundError, json.decoder.JSONDecodeError):
-    config = {'video_drive': 'D:\\'}
-    with open(CONFIG_FILE_PATH, 'w') as f:
-        json.dump(config, f)
+    config = {'video_drive': 'D:\\', 'version': '1.0'}
+
+version = config['version']
 video_drive = config['video_drive']
+
 
 # Create a dictionary to store the process for each button
 button_processes = {}
