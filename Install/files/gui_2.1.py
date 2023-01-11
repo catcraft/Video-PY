@@ -12,7 +12,7 @@ import random
 from flask import Flask, request, redirect
 import threading
 import socket
-
+from datetime import datetime
 # Add a new global variable to store the path of the file where the video info will be saved
 col1 = "#a9b7cc"
 topcol = "#293241"
@@ -34,7 +34,6 @@ BG_FILE_PATH= os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'bg.png
 CONFIG_FILE_PATH = os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'config.json')
 
 ip_address = socket.gethostbyname(socket.gethostname())
-print(ip_address)
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -164,7 +163,7 @@ image = ImageTk.PhotoImage(image)
 label = tk.Label(window, image=image)
 
 # Place the label widget at the top of the window
-label.pack(side="top", fill="both", expand=True)
+label.place(x=0,y=0)
 
 #  Define a function to be called when a button is clicked
 def button_clicked(number, show_file_dialog):
@@ -253,26 +252,36 @@ top_bar.place(x = 0, y = 0)
 
 ip_label = tk.Label(window, text=f"{ip_address}:5000", font=("Helvetica", int(font_size / 1.5)), bg="black", fg="white")
 
+frame = tk.Frame(window)
+frame.grid(row=0, column=0, sticky="nsew")
 
-
-startx = 0.1
 for i in range(number_of_monitors):
-    exec(f'button{i+1} = tk.Button(window, text=f"{i+1}",  width=w, height=h, font=("Helvetica", sz, "bold"), relief="solid", bd=4, command=lambda: button_clicked({i + 1}, True))')
-    exec(f'button{i+1}.place(relx = startx, rely = 0.5)')
+    exec(f'button{i+1} = tk.Button(frame, text=f"{i+1}", width=w, height=h, font=("Helvetica", sz, "bold"), relief="solid", bd=4, command=lambda: button_clicked({i + 1}, True))')
+    exec(f'button{i+1}.grid(column={i}, row=0)')
     exec(f'button{i+1}.bind("<Button-3>", lambda event: button_clicked({i + 1}, False))')
-    startx = startx + 0.2
+
+frame.grid_rowconfigure(0, weight=1)
+frame.grid_columnconfigure(0, weight=1)
+frame.place(relx=0.5, rely=0.5, anchor="center")
+
 exec(f'button{number_of_monitors + 1} = tk.Button(text="Hilfe", width=w, height=int(h / 2), font=("Helvetica", int(sz / 2), "bold"), relief="solid", bd=4, command=lambda:helppopup(), bg = hlpbg)')
 exec(f'button{number_of_monitors+1}.place(relx = 0, rely = 0)')
 exec(f'button{number_of_monitors + 2} = tk.Button(text="Hilfe", width=w, height=int(h / 2), font=("Helvetica", int(sz / 2), "bold"), relief="solid", bd=4, command=lambda:helppopup(), bg = hlpbg)')
 exec(f'button{number_of_monitors+2}.place(relx = 0, rely = 0)')
+timelabel = tk.Label(text="00:00:00",bg=topcol, font=("small fonts", (int(sz * 1.3)), "bold"), fg="white")
 buttonrnd = tk.Button(text="Zufällig", width=w, height=int(h / 2), font=("Helvetica", int(sz / 2), "bold"), relief="solid", bd=4, command=lambda: random_starter())
 buttonend = tk.Button(text="Alle Stoppen", width=w, height=int(h / 2), font=("Helvetica", int(sz / 2), "bold"), relief="solid", bd=4, command=lambda: killall())
-buttonrnd.place(relx = 0.10, rely=0)
-buttonend.place(relx = 0.2, rely=0)
+buttonrnd.place(relx = 0.84, rely=0)
+buttonend.place(relx = 0.92, rely=0)
+timelabel.place(relx=0.5,rely=0)
 
-
-
+def updatetime():
+    currentDateAndTime = datetime.now()
+    time = currentDateAndTime.strftime("%H:%M:%S")
+    timelabel.config(text=time, font=("small fonts", (int(sz * 1.3))))
+    window.after(1000, updatetime)
 # Place the label at the bottom right corner of the window
+updatetime()
 ip_label.place(relx=0.86, rely=0.91)
 
 # Bind the right mouse button click event to the button_clicked function
