@@ -33,12 +33,8 @@ VIDEOS_FILE_PATH = os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 's
 PLAYER_FILE_PATH= os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'player.py')
 BG_FILE_PATH= os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'bg.png')
 CONFIG_FILE_PATH = os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'config.json')
-FONT_FILE_PATH = os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'Digital.ttf')
 
-pyglet.font.add_file(FONT_FILE_PATH)
-print(FONT_FILE_PATH)
 ip_address = socket.gethostbyname(socket.gethostname())
-print(ip_address)
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
