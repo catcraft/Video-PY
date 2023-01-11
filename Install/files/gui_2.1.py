@@ -46,7 +46,7 @@ def index():
             killall()
         else:
             file_name = request.form['file']
-            file_path = os.path.join('D:\\', file_name)
+            file_path = os.path.join(video_drive, file_name)
             number = int(request.form['number'])
             if number in button_processes:
                 # If it does, kill the process
@@ -62,7 +62,7 @@ def index():
                 button_processes[number] = subprocess.Popen([sys.executable, PLAYER_FILE_PATH, str(number), file_path])
                 print(button_processes)
         return redirect('/')
-    mp4_files = [f for f in os.listdir('D:\\') if f.endswith('.mp4')]
+    mp4_files = [f for f in os.listdir(video_drive) if f.endswith('.mp4')]
     return """
        <head>
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -133,7 +133,8 @@ except (FileNotFoundError, json.decoder.JSONDecodeError):
     config = {'video_drive': 'D:\\', 'version': '1.0'}
 
 version = config['version']
-video_drive = config['video_drive']
+video_drive = (config['video_drive'] + "\\")
+
 
 
 # Create a dictionary to store the process for each button
@@ -231,7 +232,7 @@ def killall():
 def start_random_video(number):
     found = 0
     # Get a list of all the video files in D:\
-    files = [f for f in os.listdir("D:\\") if f.endswith(".mp4") or f.endswith(".avi")]
+    files = [f for f in os.listdir(video_drive) if f.endswith(".mp4") or f.endswith(".avi")]
     # Select a random file from the list
     while found == 0:
         file = random.choice(files)
