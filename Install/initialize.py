@@ -25,9 +25,7 @@ def download():
     place_on_desktop()
 
 def place_on_desktop():
-    print("yes")
     if place_on_desktop_var.get() == 1:
-        print("yesyes")
         current_dir = os.path.dirname(os.path.abspath(__file__))
         files_dir = os.path.join(current_dir, 'files')
         # Get the path to the "gui.py" file
@@ -42,6 +40,8 @@ def place_on_desktop():
         # Otherwise, copy the file to the desktop
         shutil.copy(gui_file_path, desktop_dir)
         print(f"{gui_file_path} has been copied to {desktop_dir}")
+        root.destroy()
+        os._exit(0)
 
         
 root = tk.Tk()
