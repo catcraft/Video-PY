@@ -13,7 +13,6 @@ from flask import Flask, request, redirect
 import threading
 import socket
 from datetime import datetime
-import pyglet
 # Add a new global variable to store the path of the file where the video info will be saved
 col1 = "#a9b7cc"
 topcol = "#293241"
