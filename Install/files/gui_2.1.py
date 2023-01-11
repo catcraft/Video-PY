@@ -273,7 +273,7 @@ buttonrnd = tk.Button(text="Zufällig", width=w, height=int(h / 2), font=("Helve
 buttonend = tk.Button(text="Alle Stoppen", width=w, height=int(h / 2), font=("Helvetica", int(sz / 2), "bold"), relief="solid", bd=4, command=lambda: killall())
 buttonrnd.place(relx = 0.84, rely=0)
 buttonend.place(relx = 0.92, rely=0)
-timelabel.place(relx=0.5,rely=0)
+timelabel.place(relx=0.47,rely=0)
 
 def updatetime():
     currentDateAndTime = datetime.now()
@@ -282,7 +282,7 @@ def updatetime():
     window.after(1000, updatetime)
 # Place the label at the bottom right corner of the window
 updatetime()
-ip_label.place(relx=0.86, rely=0.91)
+ip_label.place(relx=0.94, rely=0.96)
 
 # Bind the right mouse button click event to the button_clicked function
 # Add the buttons to the window
@@ -305,7 +305,7 @@ if os.path.exists(VIDEOS_FILE_PATH) and os.path.getsize(VIDEOS_FILE_PATH) > 0:
 # Set the app to call the on_closing function when closed
 window.protocol("WM_DELETE_WINDOW", on_closing)
 label = tk.Label(text=f"GUI {version} Made with ❤️ by Eric & ChatGPT", font=("Segoe UI Emoji", int(font_size / 1.5)), bg="black", fg="White")
-label.place(relx=0.01, rely=0.91)
+label.place(relx=0.01, rely=0.96)
 
 window.state("zoomed")
 # Run the Tkinter event loop
