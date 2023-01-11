@@ -19,6 +19,7 @@ topcol = "#293241"
 bgcol = "#98c1d9"
 hlpbg = "#7b9bb1"
 btncol = "#ababab"
+version = 2.1
 small = False
 name = (platform.uname().node)
 if name == "PHNAGSF2211":
@@ -287,7 +288,7 @@ if os.path.exists(VIDEOS_FILE_PATH) and os.path.getsize(VIDEOS_FILE_PATH) > 0:
 
 # Set the app to call the on_closing function when closed
 window.protocol("WM_DELETE_WINDOW", on_closing)
-label = tk.Label(text="GUI v2 Made with ❤️ by Eric & ChatGPT", font=("Segoe UI Emoji", int(font_size / 1.5)), bg="black", fg="White")
+label = tk.Label(text=f"GUI {version} Made with ❤️ by Eric & ChatGPT", font=("Segoe UI Emoji", int(font_size / 1.5)), bg="black", fg="White")
 label.place(relx=0.01, rely=0.91)
 
 window.state("zoomed")
