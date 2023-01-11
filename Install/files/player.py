@@ -34,6 +34,7 @@ class VideoPlayer(QMainWindow):
         if position == self.media_player.duration():
             # If it is, seek back to the beginning and start playing again
             self.media_player.setPosition(0)
+            self.media_player.setVolume(0)
             self.media_player.play()
 
 if __name__ == "__main__":
