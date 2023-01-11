@@ -21,9 +21,12 @@ hlpbg = "#7b9bb1"
 btncol = "#ababab"
 version = 2.1
 small = False
-name = (platform.uname().node)
-if name == "PHNAGSF2211":
-    small = True
+try:
+    name = (platform.uname().node)
+    if name == "PHNAGSF2211":
+        small = True
+except:
+    print("no name detected continuing")
 
 VIDEOS_FILE_PATH = os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'saved_data.txt')
 PLAYER_FILE_PATH= os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'player.py')
