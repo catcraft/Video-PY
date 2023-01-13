@@ -30,6 +30,30 @@ def check_module(module_name, progressbar):
     progressbar.step()
     root.update_idletasks()
 
+def update_gui():
+    try:
+        # Delete old GUI files stored in the Documents
+        user_doc = os.path.join(os.path.expanduser("~"), 'Documents')
+        py_dir = os.path.join(user_doc, 'py')
+        os.remove(os.path.join(py_dir, 'player.py'))
+        
+        # Delete old GUI file stored on the desktop
+        desktop_path = os.path.join(os.path.expanduser("~"), 'Desktop')
+        os.remove(os.path.join(desktop_path, 'gui_2.1.py'))
+        
+        # Copy new GUI files to the Documents
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        files_dir = os.path.join(current_dir, 'files')
+        shutil.copy(os.path.join(files_dir, 'gui_2.1.py'), py_dir)
+        
+        # Copy new GUI file to the desktop
+        shutil.copy(os.path.join(files_dir, 'player.py'), desktop_path)
+        messagebox.showinfo("Update", "Player GUI has been updated.")
+        root.destroy()
+        os._exit(0)
+    except Exception as e:
+        messagebox.showerror("Error", f"Encounterd error during updating of GUI \n{e}")
+
 def download():
     try:
         progressbar = ttk.Progressbar(root, orient="horizontal", length=200, mode="determinate", maximum=len(modules))
@@ -107,4 +131,6 @@ place_on_desktop_checkbox = tk.Checkbutton(root, text="Place GUI on desktop", va
 place_on_desktop_checkbox.pack()
 download_button = tk.Button(root, width=15,height=5, text="Download", command=download)
 download_button.pack()
+update_button = tk.Button(root, text="Update", command=update_gui)
+update_button.pack()
 root.mainloop()
