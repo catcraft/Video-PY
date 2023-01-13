@@ -44,10 +44,10 @@ def update_gui():
         # Copy new GUI files to the Documents
         current_dir = os.path.dirname(os.path.abspath(__file__))
         files_dir = os.path.join(current_dir, 'files')
-        shutil.copy(os.path.join(files_dir, 'gui_2.1.py'), py_dir)
+        shutil.copy(os.path.join(files_dir, 'player.py'), py_dir)
         
         # Copy new GUI file to the desktop
-        shutil.copy(os.path.join(files_dir, 'player.py'), desktop_path)
+        shutil.copy(os.path.join(files_dir, 'gui_2.1.py'), desktop_path)
         messagebox.showinfo("Update", "Player GUI has been updated.")
         root.destroy()
         os._exit(0)
