@@ -3,5 +3,7 @@ A Video Player that works for multiple Screens and can select to be played on th
 
 I made this programm for work
 
-The Programm is very Specific, i dont care if it dosent work for you,
-I will (probably) not support, help, update anyone.
+Well umm i am trying to improve this programm as time goes on.
+If you got problems hit me up il try to help.
+
+*Install instructions here soon*
