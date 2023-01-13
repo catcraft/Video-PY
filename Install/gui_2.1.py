@@ -13,6 +13,9 @@ from flask import Flask, request, redirect
 import threading
 import socket
 from datetime import datetime
+import tkinter.messagebox as messagebox
+from PIL import Image, ImageSequence
+import cv2
 # Add a new global variable to store the path of the file where the video info will be saved
 col1 = "#a9b7cc"
 topcol = "#293241"
@@ -32,6 +35,7 @@ VIDEOS_FILE_PATH = os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 's
 PLAYER_FILE_PATH= os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'player.py')
 BG_FILE_PATH= os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'bg.png')
 CONFIG_FILE_PATH = os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'config.json')
+MINMAX_FILE_PATH = os.path.join(os.environ['USERPROFILE'], 'Documents', 'Py', 'Minmax.png')
 
 ip_address = socket.gethostbyname(socket.gethostname())
 app = Flask(__name__)
@@ -184,7 +188,6 @@ def button_clicked(number, show_file_dialog):
             print("function clicked number:", number)
             print(file_path)
             button_processes[number] = subprocess.Popen([sys.executable, PLAYER_FILE_PATH, str(number), file_path])
-
             
 def on_closing():
     # Terminate all subprocesses
@@ -206,6 +209,11 @@ def on_closing():
 
     
 def random_starter():
+    try:
+        files = [f for f in os.listdir(video_drive) if f.endswith(".mp4") or f.endswith(".avi")]
+    except:
+        messagebox.showerror("File Error", f"Could not find the files in {str(video_drive)}")
+        return()
     killall()
     for i in range(1, (number_of_monitors + 1)):
         z = i - 1
@@ -231,17 +239,20 @@ def killall():
 def start_random_video(number):
     found = 0
     # Get a list of all the video files in D:\
-    files = [f for f in os.listdir(video_drive) if f.endswith(".mp4") or f.endswith(".avi")]
-    # Select a random file from the list
-    while found == 0:
-        file = random.choice(files)
-        # Start the video on the specified screen
-        file = random.choice(files)
-        if file not in playing_videos:
-            print("Found a video, screen: ", number)
-            button_processes[number] = subprocess.Popen([sys.executable, PLAYER_FILE_PATH, str(number), f"D:\\{file}"])
-            playing_videos.append(file)
-            found = 1
+    try:
+        files = [f for f in os.listdir(video_drive) if f.endswith(".mp4") or f.endswith(".avi")]
+        # Select a random file from the list
+        while found == 0:
+            file = random.choice(files)
+            # Start the video on the specified screen
+            file = random.choice(files)
+            if file not in playing_videos:
+                print("Found a video, screen: ", number)
+                button_processes[number] = subprocess.Popen([sys.executable, PLAYER_FILE_PATH, str(number), f"{video_drive}{file}"])
+                playing_videos.append(file)
+                found = 1
+    except:
+        messagebox.showerror("File Error", f"Could not find the files in {str(video_drive)}")
 
 def helppopup():
     tkinter.messagebox.showinfo("Steuerung",  "Zum Schliessen von Videos: Rechtsklick auf den zuvor ausgewählten Bildschirm")
@@ -302,13 +313,67 @@ if os.path.exists(VIDEOS_FILE_PATH) and os.path.getsize(VIDEOS_FILE_PATH) > 0:
                 exec(f'button{i+1}.config(bg=btncol)')
    
 
-# Set the app to call the on_closing function when closed
-window.protocol("WM_DELETE_WINDOW", on_closing)
+white_bar = tk.Label(window, bg="white")
+white_bar.pack(fill="x")
+white_bar.pack_forget()
+
+close_button = tk.Button(window,borderwidth=0, height=1, width=2, text="X", bg="White",command=lambda:on_closing())
+close_button.place(relx = 0.99, y=0)
+close_button.place_forget()
+
+minmax = tk.Button(window,borderwidth=0, height=1, width=2, bg="White", text=((u'\u25A1')),command=lambda:window.attributes("-fullscreen", False))
+minmax.place(relx = 0.985, y=0)
+minmax.place_forget()
+
+Minimize = tk.Button(window,borderwidth=0, height=1, width=2, text="-", bg="White",command=lambda:window.state(newstate='iconic'))
+Minimize.place(relx = 0.98, y=0)
+Minimize.place_forget()
+
+def on_mouse_move(event):
+    if window.attributes("-fullscreen") == True:
+        if event.y >= 20:
+            white_bar.pack_forget()
+            close_button.place_forget()
+            Minimize.place_forget()
+            minmax.place_forget()
+        else:
+            white_bar.pack(fill="x")
+            close_button.place(relx = 0.99, y=0)
+            Minimize.place(relx = 0.98, y=0)
+            minmax.place(relx = 0.985, y=0)   
+    else:
+        white_bar.pack_forget()
+        close_button.place_forget()
+        Minimize.place_forget()
+        minmax.place_forget()
+def on_enter(e):
+    close_button['background'] = '#e81123'
+def on_leave(e):
+    close_button['background'] = 'white'
+def on_enterm(e):
+    Minimize['background'] = '#e6e6e6'
+def on_leavem(e):
+    Minimize['background'] = 'white'
+def on_enterx(e):
+    minmax['background'] = '#e6e6e6'
+def on_leavexm(e):
+    minmax['background'] = 'white'
+
+close_button.bind("<Enter>", on_enter)
+close_button.bind("<Leave>", on_leave)
+Minimize.bind("<Enter>", on_enterm)
+Minimize.bind("<Leave>", on_leavem)
+minmax.bind("<Enter>", on_enterx)
+minmax.bind("<Leave>", on_leavexm)
+window.bind("<Motion>", on_mouse_move)
+
+window.protocol("WM_DELETE_WINDOW", on_closing)      
 label = tk.Label(text=f"GUI {version} Made with ❤️ by Eric & ChatGPT", font=("Segoe UI Emoji", int(font_size / 1.5)), bg="black", fg="White")
 label.place(relx=0.01, rely=0.96)
 
-window.state("zoomed")
+window.attributes("-fullscreen", True)
 # Run the Tkinter event loop
 flask_thread = threading.Thread(target=start_flask)
 flask_thread.start()
+
 window.mainloop()
