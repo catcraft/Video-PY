@@ -15,7 +15,6 @@ import socket
 from datetime import datetime
 import tkinter.messagebox as messagebox
 from PIL import Image, ImageSequence
-import cv2
 # Add a new global variable to store the path of the file where the video info will be saved
 col1 = "#a9b7cc"
 topcol = "#293241"
