@@ -8,8 +8,8 @@ If you got problems hit me up il try to help.
 
 *How to install*
 1. Download the Video Player
-2. 
-3. Download Python if you havent already
+ 
+2. Download Python if you havent already
 
 3. Unpack Video-Player-main.zip
 
