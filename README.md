@@ -8,7 +8,6 @@ If you got problems hit me up il try to help.
 
 *How to install*
 1. Download the Video Player
-![image](https://user-images.githubusercontent.com/72657021/214295069-9728fc00-ded1-4824-8af8-0efb38b2a2aa.png)
 ![image](https://user-images.githubusercontent.com/72657021/214295094-95d2e292-4ba6-444d-975c-44d821ac4fa2.png)
 
 2. Download Python if you havent already
