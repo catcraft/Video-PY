@@ -15,13 +15,9 @@ ericmuller377@gmail.com
    
 3. Unpack Video-Player-main.zip
 
-4. Run Installer.pyw -> Sometimes it takes multiple attempts
+4. Run Installer.pyw 
 
-   -> *Choose Place GUI on desktop its rather important*
-   
-   -> *if you choose not the place the GUI on desktop, it will save it in "C:\Users\%username%\Documents\py"*
-   
-![image](https://user-images.githubusercontent.com/72657021/214505061-98808294-efa7-4b4c-ab09-6fb6ef6979d3.png)
+-> Sometimes it takes multiple attempts
 
 5.	Download K-Lite codec
 
