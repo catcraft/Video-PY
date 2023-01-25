@@ -1,4 +1,4 @@
-# Video-Player
+# Video-PY
 This programm is a small Python based Video Player that works for multiple Screens and can select to be played on the respective screen. Originally i made this just for work reasons but if you run into any problems feel free to hit me up.
 ericmuller377@gmail.com
 
