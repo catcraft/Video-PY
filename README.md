@@ -21,9 +21,9 @@ This programm is a small Python based Video Player that works for multiple Scree
 ![image](https://user-images.githubusercontent.com/72657021/214505061-98808294-efa7-4b4c-ab09-6fb6ef6979d3.png)
 
 5.	Download K-Lite codec
-6.	
-   -> Download: https://www.codecguide.com/download_kl.htm
+
+  -> Download: https://www.codecguide.com/download_kl.htm
    
-   -> Alternative Download link: https://github.com/catcraft/Video-Player/blob/e7bb1ab6da09517d420ad49b98f9ccd5d8e4625a/Debug-Help/K-Lite_Codec_Pack_1740_Basic.exe
+  -> Alternative Download link: https://github.com/catcraft/Video-Player/blob/e7bb1ab6da09517d420ad49b98f9ccd5d8e4625a/Debug-Help/K-Lite_Codec_Pack_1740_Basic.exe
 
 6. Run Gui 2.1
