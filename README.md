@@ -13,6 +13,7 @@ This programm is a small Python based Video Player that works for multiple Scree
 4. Run Installer.pyw -> Sometimes it takes multiple attempts
 
    -> *Choose Place GUI on desktop its rather important*
+   
    -> *if you choose not the place the GUI on desktop, it will save it in "C:\Users\%username%\Documents\py"*
 ![image](https://user-images.githubusercontent.com/72657021/214505061-98808294-efa7-4b4c-ab09-6fb6ef6979d3.png)
 
