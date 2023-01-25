@@ -17,7 +17,9 @@ ericmuller377@gmail.com
 
 4. Run Installer.pyw 
 
--> Sometimes it takes multiple attempts
+  -> Sometimes it takes multiple attempts
+  
+  -> There might be a installer.exe file. Maybie you are able to run it somehow without windows stopping it.
 
 5.	Download K-Lite codec
 
