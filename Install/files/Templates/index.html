@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Web Gui Video">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro&display=swap" rel="stylesheet">
+    <title>Web Gui Video</title>
+    <style>
+        body {
+            font-family: 'SF Pro', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            background: linear-gradient(135deg, #007ACC 0%, #00C9FF 100%);
+            padding: 10px;
+        }
+        
+        .logo {
+            margin-left: 10px;
+            margin-top: 17px;
+        }
+        
+        .logo img {
+            height: 61px;
+            width: 86.4px;
+        }
+        
+        .button-container {
+            display: flex;
+            margin-left: auto;
+            margin-right: 10px;
+        }
+        
+        .button-container form {
+            margin: 0;
+        }
+        
+        .button {
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid white;
+            height: 75px;
+            width: 150px;
+            padding: 0 15px;
+            background-color: transparent;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            background-color: white;
+            color: #007ACC;
+        }
+        
+        .button:focus {
+            outline: none;
+        }
+        
+        .button-container form:first-child {
+            margin-right: 5px;
+        }
+        
+        .form-container {
+            background-color: #E5E5E5;
+            padding: 5px;
+        }
+        
+        .form-container form {
+            margin-left: 20px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-container label {
+            font-weight: bold;
+        }
+        
+        .select {
+            border-radius: 25px;
+            background-color: #CCCCCC;
+            color: #ffffff;
+            border: none;
+            font-weight: bold;
+            padding: 10px;
+            -webkit-appearance: none;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .open-button {
+            border-radius: 10px;
+            border: 1px solid white;
+            font-size: 20px;
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+        
+        .open-button:hover {
+            background-color: white;
+            color: #007ACC;
+        }
+        
+        .open-button:focus {
+            outline: none;
+        }
+        
+        .monitor-container {
+            background-color: #E5E5E5;
+            padding: 5px;
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .monitor-container label {
+            font-weight: bold;
+            padding-top: 10px;
+        }
+        
+        .monitor-select {
+            border-radius: 25px;
+            background-color: #CCCCCC;
+            color: #ffffff;
+            border: none;
+            font-weight: bold;
+            padding: 10px;
+            -webkit-appearance: none;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a class="logo" href="#">
+            <img src="https://iili.io/HRaHi5N.png" alt="Logo">
+        </a>
+        <div class="button-container">
+            <form method="POST">
+                <button type="submit" name="button" value="Random" class="button">Random</button>
+            </form>
+            <form method="POST">
+                <button type="submit" name="button" value="Kill Running" class="button">Kill Running</button>
+            </form>
+        </div>
+    </div>
+    <div class="form-container">
+        <form method="POST">
+            <label for="file">Video:</label>
+            <select name="file" id="file" class="select">
+                {% for file in mp4_files %}
+                    <option value="{{ file }}">{{ file }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <div class="monitor-container">
+        <label for="number">Bildschirm:</label>
+        <select name="number" id="number" class="monitor-select">
+            {% for i in range(1, number_of_monitors + 1) %}
+                <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="open-button">Open</button>
+    </div>
+</body>
+</html>
