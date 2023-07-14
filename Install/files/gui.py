@@ -160,20 +160,6 @@ def killall():
     for button in button_list:
         button.config(bg='white')
 
-if os.path.exists(VIDEOS_FILE_PATH) and os.path.getsize(VIDEOS_FILE_PATH) > 0:
-    with open(VIDEOS_FILE_PATH, "r") as file:
-        data = json.loads(file.read())
-        processes = data["processes"]
-        for process_info in processes.values():
-            file_path = process_info["file_path"]
-            screen_number = process_info["screen_number"]
-            button_processes[screen_number] = subprocess.Popen(
-                [sys.executable, PLAYER_FILE_PATH, str(screen_number), file_path]
-            )
-            
-            for i in range(number_of_monitors):
-                button = button_list[i]
-                button.config(bg=btncol)
                 
 def helppopup():
     tkinter.messagebox.showinfo("Steuerung",  "Zum Schliessen von Videos: Rechtsklick auf den zuvor ausgewählten Bildschirm")
@@ -216,6 +202,22 @@ label.place(relx=0.01, rely=0.96)
 ip_label = tk.Label(window, text=f"{ip_address}:5000", font=("Helvetica", int(font_size / 1.5)), bg="black", fg="white")
 ip_label.place(relx=0.94, rely=0.96)
 
+
+if os.path.exists(VIDEOS_FILE_PATH) and os.path.getsize(VIDEOS_FILE_PATH) > 0:
+    with open(VIDEOS_FILE_PATH, "r") as file:
+        data = json.loads(file.read())
+        processes = data["processes"]
+        for process_info in processes.values():
+            file_path = process_info["file_path"]
+            screen_number = process_info["screen_number"]
+            button_processes[screen_number] = subprocess.Popen(
+                [sys.executable, PLAYER_FILE_PATH, str(screen_number), file_path]
+            )
+            
+            for i in range(number_of_monitors):
+                button = button_list[i]
+                button.config(bg=btncol)
+                
 #Clock
 def updatetime():
     currentDateAndTime = datetime.now()
